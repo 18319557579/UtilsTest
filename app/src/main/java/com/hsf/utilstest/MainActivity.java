@@ -10,6 +10,11 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
+import com.hsf.utilstest.databinding.ActivityMainBinding;
+import com.hsf.utilstest.first_enter.FirstEnterUtil;
+import com.hsf.utilstest.huangming.DeviceInfoUtils;
+import com.hsf.utilstest.huangming.GetPhoneInfo;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -22,10 +27,36 @@ import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
+    ActivityMainBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        binding.btnIsFirst.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("Daisy", "第一次：" + FirstEnterUtil.isFirst(MainActivity.this));
+            }
+        });
+
+        binding.btnGet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("Daisy", GetPhoneInfo.getAndroidId(MainActivity.this));
+                Log.d("Daisy", DeviceInfoUtils.getPackageVersionName(MainActivity.this));
+                Log.d("Daisy", "" + DeviceInfoUtils.getPackageVersionCode(MainActivity.this));
+                Log.d("Daisy", Build.BRAND);
+                Log.d("Daisy", DeviceInfoUtils.getAndroidVersion());
+                Log.d("Daisy", GetPhoneInfo.getDeviceDefaultLanguage());
+                Log.d("Daisy", DeviceInfoUtil.getPackageName(MainActivity.this));
+                Log.d("Daisy", DeviceInfoUtil.getInfo(MainActivity.this));
+//                Log.d("Daisy", DeviceInfoUtil.GetNetState(MainActivity.this));
+                Log.d("Daisy", DeviceInfoUtil.netType(MainActivity.this));
+            }
+        });
     }
 
     public void getInfo(View view) {

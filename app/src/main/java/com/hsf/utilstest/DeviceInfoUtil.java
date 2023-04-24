@@ -1,8 +1,14 @@
 package com.hsf.utilstest;
 
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -93,4 +99,77 @@ public class DeviceInfoUtil {
         return cpuName;
     }
 
+    public static String getPackageName(Context context) {
+        PackageManager manager = context.getPackageManager();
+
+        try {
+            PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
+            return info.packageName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static String getInfo(Context context) {
+        TelephonyManager tm = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
+        return tm.getSimCountryIso();
+    }
+
+    public static String GetNetState(Context context) {
+        String netState = "null";
+        ConnectivityManager connectivity = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivity != null) {
+            NetworkInfo info = connectivity.getActiveNetworkInfo();
+            if (info != null && info.isConnected() && info.getState() == NetworkInfo.State.CONNECTED) {
+                label18:
+                switch(info.getType()) {
+                    case 0:
+                        switch(info.getSubtype()) {
+
+                            case 1:
+                            case 2:
+                            case 4:
+                                netState = "2g";
+                                break label18;
+                            case 3:
+                            case 5:
+                            case 6:
+                            case 8:
+                            case 12:
+                                netState = "3g";
+                            case 7:
+                            case 9:
+                            case 10:
+                            case 11:
+                            default:
+                                break label18;
+                            case 13:
+                                netState = "4g";
+                                break label18;
+                            case 20:
+                                netState = "5g";
+                                break label18;
+                        }
+                    case 1:
+                        netState = "wifi";
+                }
+            }
+        }
+
+        return netState;
+    }
+
+    public static String netType(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = connectivityManager.getActiveNetworkInfo();
+        if (info == null) {
+            return "未联网";
+        }
+        if (info.getType() == ConnectivityManager.TYPE_WIFI) {
+            return "wifi";
+        } else {
+            return "流量";
+        }
+    }
 }

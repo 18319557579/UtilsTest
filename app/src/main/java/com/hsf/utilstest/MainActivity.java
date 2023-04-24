@@ -14,6 +14,7 @@ import com.hsf.utilstest.databinding.ActivityMainBinding;
 import com.hsf.utilstest.first_enter.FirstEnterUtil;
 import com.hsf.utilstest.huangming.DeviceInfoUtils;
 import com.hsf.utilstest.huangming.GetPhoneInfo;
+import com.hsf.utilstest.print.PrintLog;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -23,7 +24,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,7 +47,12 @@ public class MainActivity extends AppCompatActivity {
         binding.btnGet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Daisy", GetPhoneInfo.getAndroidId(MainActivity.this));
+                /*Map<String, String> map = new HashMap<>();
+                map.put("1", "h");
+                map.put("2", "s");
+                map.put("3", "f");*/
+
+/*                Log.d("Daisy", GetPhoneInfo.getAndroidId(MainActivity.this));
                 Log.d("Daisy", DeviceInfoUtils.getPackageVersionName(MainActivity.this));
                 Log.d("Daisy", "" + DeviceInfoUtils.getPackageVersionCode(MainActivity.this));
                 Log.d("Daisy", Build.BRAND);
@@ -53,8 +60,21 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Daisy", GetPhoneInfo.getDeviceDefaultLanguage());
                 Log.d("Daisy", DeviceInfoUtil.getPackageName(MainActivity.this));
                 Log.d("Daisy", DeviceInfoUtil.getInfo(MainActivity.this));
-//                Log.d("Daisy", DeviceInfoUtil.GetNetState(MainActivity.this));
-                Log.d("Daisy", DeviceInfoUtil.netType(MainActivity.this));
+                Log.d("Daisy", DeviceInfoUtil.netType(MainActivity.this));*/
+
+                PrintLog.INSTANCE
+                        .addParam("AndroidId", GetPhoneInfo.getAndroidId(MainActivity.this))
+                        .addParam("Version Code", DeviceInfoUtils.getPackageVersionName(MainActivity.this))
+                        .addParam("VersionName", DeviceInfoUtils.getPackageVersionCode(MainActivity.this))
+                        .addParam("OS Type", Build.BRAND)
+                        .addParam("OS Version", DeviceInfoUtils.getAndroidVersion())
+                        .addParam("语言", GetPhoneInfo.getDeviceDefaultLanguage())
+                        .addParam("包名", DeviceInfoUtil.getPackageName(MainActivity.this))
+                        .addParam("sim国家", DeviceInfoUtil.getInfo(MainActivity.this))
+                        .addParam("网络类型", DeviceInfoUtil.netType(MainActivity.this))
+                        .print();
+
+
             }
         });
     }

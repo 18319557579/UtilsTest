@@ -10,11 +10,13 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
+import com.hsf.utilstest.clipboard.ClipboardUtil;
 import com.hsf.utilstest.databinding.ActivityMainBinding;
 import com.hsf.utilstest.first_enter.FirstEnterUtil;
 import com.hsf.utilstest.huangming.DeviceInfoUtils;
 import com.hsf.utilstest.huangming.GetPhoneInfo;
 import com.hsf.utilstest.print.PrintLog;
+import com.hsf.utilstest.share.ShareTest;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -75,6 +77,21 @@ public class MainActivity extends AppCompatActivity {
                         .print();
 
 
+            }
+        });
+
+        binding.btnClip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String clipContent = ClipboardUtil.getClipboardContent(MainActivity.this);
+                Log.d("Daisy", "剪切板的内容：" + clipContent);
+            }
+        });
+
+        binding.btnShareText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShareTest.shareText(MainActivity.this, "我是黄绍飞Daisy");
             }
         });
     }

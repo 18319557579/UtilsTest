@@ -2,6 +2,8 @@ package com.hsf.utilstest;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -94,6 +96,16 @@ public class MainActivity extends AppCompatActivity {
                 ShareTest.shareText(MainActivity.this, "我是黄绍飞Daisy");
             }
         });
+
+        binding.btnSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri uri = Uri.parse("https://www.baidu.com");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
+
     }
 
     public void getInfo(View view) {

@@ -51,21 +51,6 @@ public class MainActivity extends AppCompatActivity {
         binding.btnGet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Map<String, String> map = new HashMap<>();
-                map.put("1", "h");
-                map.put("2", "s");
-                map.put("3", "f");*/
-
-/*                Log.d("Daisy", GetPhoneInfo.getAndroidId(MainActivity.this));
-                Log.d("Daisy", DeviceInfoUtils.getPackageVersionName(MainActivity.this));
-                Log.d("Daisy", "" + DeviceInfoUtils.getPackageVersionCode(MainActivity.this));
-                Log.d("Daisy", Build.BRAND);
-                Log.d("Daisy", DeviceInfoUtils.getAndroidVersion());
-                Log.d("Daisy", GetPhoneInfo.getDeviceDefaultLanguage());
-                Log.d("Daisy", DeviceInfoUtil.getPackageName(MainActivity.this));
-                Log.d("Daisy", DeviceInfoUtil.getInfo(MainActivity.this));
-                Log.d("Daisy", DeviceInfoUtil.netType(MainActivity.this));*/
-
                 PrintLog.INSTANCE
                         .addParam("AndroidId", GetPhoneInfo.getAndroidId(MainActivity.this))
                         .addParam("Version Code", DeviceInfoUtils.getPackageVersionName(MainActivity.this))

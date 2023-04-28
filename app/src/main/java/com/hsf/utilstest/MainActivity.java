@@ -1,5 +1,6 @@
 package com.hsf.utilstest;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -19,6 +20,7 @@ import com.hsf.utilstest.huangming.DeviceInfoUtils;
 import com.hsf.utilstest.huangming.GetPhoneInfo;
 import com.hsf.utilstest.print.PrintLog;
 import com.hsf.utilstest.share.ShareTest;
+import com.hsf.utilstest.shore.StoreUtils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -88,6 +90,14 @@ public class MainActivity extends AppCompatActivity {
                 Uri uri = Uri.parse("https://www.baidu.com");
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
+            }
+        });
+
+        binding.btnJumpGooglePlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //org.telegram.messenger
+                StoreUtils.launchAppDetail(MainActivity.this, "com.ruguoapp.jike", "com.heytap.market");
             }
         });
 

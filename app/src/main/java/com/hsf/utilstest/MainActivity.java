@@ -21,7 +21,9 @@ import com.hsf.utilstest.huangming.GetPhoneInfo;
 import com.hsf.utilstest.print.PrintLog;
 import com.hsf.utilstest.share.ShareTest;
 import com.hsf.utilstest.shore.StoreUtils;
+import com.hsf.utilstest.ui.ScreenTool;
 import com.hsf.utilstest.ui.ScreenUtils;
+import com.hsf.utilstest.ui.Utils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -117,6 +119,17 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Daisy", "判断是否有导航栏(新)：" + ScreenUtils.isNavigationBarExist(MainActivity.this));
 
                 Log.d("Daisy", "获得状态栏高度：" + ScreenUtils.getStatusBarHeight(MainActivity.this));
+            }
+        });
+
+        binding.btnChen.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Utils.setActivity(MainActivity.this);
+                Utils.hideVirtualButton();
+
+                ScreenTool.screenFull(MainActivity.this);
             }
         });
 

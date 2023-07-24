@@ -93,6 +93,8 @@ public class GetPhoneInfo {
 
     /**
      *获取设备高度(px)
+     *获取的是屏幕当前高度，不包括状态栏和导航栏。findx5p分辨率为3216*1400，当用手势导航栏时，
+     * 这里得到的是3088，当用按键导航栏时，这里得到的是2912
      */
     public static int getDeviceHeight(Context context) {//高度不包括状态栏
         return context.getResources().getDisplayMetrics().heightPixels;
@@ -101,6 +103,7 @@ public class GetPhoneInfo {
     /**
      * 屏幕高度
      * @return the height of screen, in pixel
+     * 获取的高度为屏幕的物理高度，findx5p分辨率为3216*1400，这里得到的高度为3216
      */
     public static int getScreenHeight(Context context) {//获取高度为实际高度（包括了状态栏高度）
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);

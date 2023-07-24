@@ -21,6 +21,7 @@ import com.hsf.utilstest.huangming.GetPhoneInfo;
 import com.hsf.utilstest.print.PrintLog;
 import com.hsf.utilstest.share.ShareTest;
 import com.hsf.utilstest.shore.StoreUtils;
+import com.hsf.utilstest.ui.ScreenUtils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -98,6 +99,24 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //org.telegram.messenger
                 StoreUtils.launchAppDetail(MainActivity.this, "com.ruguoapp.jike", "com.heytap.market");
+            }
+        });
+
+        binding.btnHeight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //物理高度
+                Log.d("Daisy", "屏幕高度1：" + GetPhoneInfo.getScreenHeight(MainActivity.this));
+                //当前高度，不包括状态栏和导航栏
+                Log.d("Daisy", "屏幕高度2：" + GetPhoneInfo.getDeviceHeight(MainActivity.this));
+
+
+                Log.d("Daisy", "导航栏高度：" + ScreenUtils.getNavigationBarHeight(MainActivity.this));
+
+                Log.d("Daisy", "判断是否有导航栏：" + ScreenUtils.hasNavBar(MainActivity.this));
+                Log.d("Daisy", "判断是否有导航栏(新)：" + ScreenUtils.isNavigationBarExist(MainActivity.this));
+
+                Log.d("Daisy", "获得状态栏高度：" + ScreenUtils.getStatusBarHeight(MainActivity.this));
             }
         });
 

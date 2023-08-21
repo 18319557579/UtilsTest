@@ -1,11 +1,13 @@
 package com.hsf.utilstest;
 
-import androidx.annotation.RequiresApi;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.net.wifi.WifiManager;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -14,12 +16,18 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
+import com.hsf.utilstest.clipboard.ClipboardUtil;
 import com.hsf.utilstest.databinding.ActivityMainBinding;
 import com.hsf.utilstest.first_enter.FirstEnterUtil;
 import com.hsf.utilstest.huangming.DeviceInfoUtils;
 import com.hsf.utilstest.huangming.GetPhoneInfo;
 import com.hsf.utilstest.print.PrintLog;
 import com.hsf.utilstest.various_id.IdUtils;
+import com.hsf.utilstest.share.ShareTest;
+import com.hsf.utilstest.shore.StoreUtils;
+import com.hsf.utilstest.ui.ScreenTool;
+import com.hsf.utilstest.ui.ScreenUtils;
+import com.hsf.utilstest.ui.Utils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -119,6 +127,68 @@ public class MainActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(MainActivity.this, REQUEST_PERMISSIONS, 0);
             }
         });
+
+        binding.btnClip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String clipContent = ClipboardUtil.getClipboardContent(MainActivity.this);
+                Log.d("Daisy", "剪切板的内容：" + clipContent);
+            }
+        });
+
+        binding.btnShareText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShareTest.shareText(MainActivity.this, "我是黄绍飞Daisy");
+            }
+        });
+
+        binding.btnSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri uri = Uri.parse("https://www.baidu.com");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
+
+        binding.btnJumpGooglePlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //org.telegram.messenger
+                StoreUtils.launchAppDetail(MainActivity.this, "com.ruguoapp.jike", "com.heytap.market");
+            }
+        });
+
+        binding.btnHeight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //物理高度
+                Log.d("Daisy", "屏幕高度1：" + GetPhoneInfo.getScreenHeight(MainActivity.this));
+                //当前高度，不包括状态栏和导航栏
+                Log.d("Daisy", "屏幕高度2：" + GetPhoneInfo.getDeviceHeight(MainActivity.this));
+
+
+                Log.d("Daisy", "导航栏高度：" + ScreenUtils.getNavigationBarHeight(MainActivity.this));
+
+                Log.d("Daisy", "判断是否有导航栏：" + ScreenUtils.hasNavBar(MainActivity.this));
+                Log.d("Daisy", "判断是否有导航栏(新)：" + ScreenUtils.isNavigationBarExist(MainActivity.this));
+
+                Log.d("Daisy", "获得状态栏高度：" + ScreenUtils.getStatusBarHeight(MainActivity.this));
+            }
+        });
+
+        binding.btnChen.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Utils.setActivity(MainActivity.this);
+                Utils.hideVirtualButton();
+
+                ScreenTool.screenFull(MainActivity.this);
+            }
+        });
+
     }
 
     public void getInfo(View view) {

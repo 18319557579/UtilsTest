@@ -22,6 +22,8 @@ import com.hsf.utilstest.databinding.ActivityMainBinding;
 import com.hsf.utilstest.first_enter.FirstEnterUtil;
 import com.hsf.utilstest.huangming.DeviceInfoUtils;
 import com.hsf.utilstest.huangming.GetPhoneInfo;
+import com.hsf.utilstest.packet.facade.OuterDownloadCallback;
+import com.hsf.utilstest.packet.facade.RxNet;
 import com.hsf.utilstest.print.PrintLog;
 import com.hsf.utilstest.various_id.IdUtils;
 import com.hsf.utilstest.share.ShareTest;
@@ -187,6 +189,30 @@ public class MainActivity extends AppCompatActivity {
                 Utils.hideVirtualButton();
 
                 ScreenTool.screenFull(MainActivity.this);
+            }
+        });
+
+
+        binding.btnDownload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RxNet.downloadFacade("https://p9.itc.cn/images01/20230424/13241326c6f049edaf43a682cc583478.jpeg", "", "",
+                        MainActivity.this, new OuterDownloadCallback() {
+                            @Override
+                            public void onSuccess() {
+                                Log.d("Daisy", "下载成功了（最外面）");
+                            }
+
+                            @Override
+                            public void onDownloading(long now, long max) {
+                                Log.d("Daisy", "正在下载中（最外面）, 当前:" + now + ", 总量:" + max );
+                            }
+
+                            @Override
+                            public void onFail() {
+                                Log.d("Daisy", "下载失败了（最外面）");
+                            }
+                        });
             }
         });
 

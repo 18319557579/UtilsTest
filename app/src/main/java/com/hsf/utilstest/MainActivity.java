@@ -1,6 +1,7 @@
 package com.hsf.utilstest;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -139,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
         binding.btnShareText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ShareTest.shareText(MainActivity.this, "我是黄绍飞Daisy");
+                ShareTest.shareText_withCopy(MainActivity.this, "我是黄绍飞Daisy");
             }
         });
 

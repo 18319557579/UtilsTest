@@ -3,12 +3,13 @@ package com.hsf.utilstest.print;
 import android.util.Log;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public enum PrintLog {
     INSTANCE;
 
-    private final Map<String, String> logMap = new HashMap<>();
+    private final Map<String, String> logMap = new LinkedHashMap<>();
 
     public PrintLog addParam(String key, Object value) {
         String finalValue = value == null ? "null" : value.toString();

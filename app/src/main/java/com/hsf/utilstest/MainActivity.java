@@ -1,7 +1,11 @@
 package com.hsf.utilstest;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -15,6 +19,7 @@ import com.hsf.utilstest.first_enter.FirstEnterUtil;
 import com.hsf.utilstest.huangming.DeviceInfoUtils;
 import com.hsf.utilstest.huangming.GetPhoneInfo;
 import com.hsf.utilstest.print.PrintLog;
+import com.hsf.utilstest.various_id.IdUtils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -26,6 +31,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -75,6 +81,42 @@ public class MainActivity extends AppCompatActivity {
                         .print();
 
 
+            }
+        });
+
+        binding.btnIdShow.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void onClick(View v) {
+                PrintLog.INSTANCE
+                        .addParam("AndroidId", GetPhoneInfo.getAndroidId(MainActivity.this))
+                        .addParam("IMEI", GetPhoneInfo.getCurrentImei(MainActivity.this))
+                        .addParam("手机硬件序列号", GetPhoneInfo.getDeviceSerial())
+                        .addParam("MacID", IdUtils.getMac(MainActivity.this))
+                        .addParam("获取DeviceID", IdUtils.getDeviceId(MainActivity.this))
+                        .print();
+
+                Executors.newSingleThreadExecutor().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            String adid = AdvertisingIdClient.getGoogleAdId(getApplicationContext());
+                            Log.d("Daisy","获取adid:"+adid);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        });
+
+        binding.btnPermission.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String[] REQUEST_PERMISSIONS = {
+                        Manifest.permission.READ_PHONE_STATE
+                };
+                ActivityCompat.requestPermissions(MainActivity.this, REQUEST_PERMISSIONS, 0);
             }
         });
     }

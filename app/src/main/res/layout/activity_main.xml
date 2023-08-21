@@ -25,5 +25,16 @@
         android:layout_height="wrap_content"
         android:text="获取信息"/>
 
+    <Button
+        android:id="@+id/btn_id_show"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="查看各种id"/>
+
+    <Button
+        android:id="@+id/btn_permission"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="申请权限"/>
 
 </LinearLayout>

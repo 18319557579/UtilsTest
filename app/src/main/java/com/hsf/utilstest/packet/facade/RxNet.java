@@ -11,6 +11,7 @@ import com.hsf.utilstest.packet.utils.AntZipUtils;
 import com.hsf.utilstest.packet.utils.CommonUtils;
 import com.hsf.utilstest.packet.utils.HandlerUtils;
 import com.hsf.utilstest.packet.utils.LogUtil;
+import com.hsf.utilstest.packet.utils.ZipUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -53,7 +54,8 @@ public class RxNet {
                     @Override
                     public void run() {
                         try {
-                            AntZipUtils.uncompressFile(path, activity.getFilesDir().getAbsolutePath() + File.separator, true);
+//                            AntZipUtils.uncompressFile(path, activity.getFilesDir().getAbsolutePath() + File.separator, true);
+                            ZipUtils.decompressFile(path, activity.getFilesDir().getAbsolutePath() + File.separator, true);
                             LogUtil.d("解压完成");
 
                             if (outerDownloadCallback != null) outerDownloadCallback.onSuccess();

@@ -45,4 +45,10 @@ public class CommonUtils {
     public static String getName(String urlPath) {
         return new File(urlPath).getName();
     }
+
+    public static String getJustFileName(String urlPath) {
+        String fileNameWithPostfix = getName(urlPath);
+        String[] strs = fileNameWithPostfix.split("\\.");
+        return strs[0];
+    }
 }

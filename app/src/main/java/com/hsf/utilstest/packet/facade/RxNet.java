@@ -26,10 +26,8 @@ public class RxNet {
 
     public static void downloadFacade(String url, String folder, String location, Activity activity, OuterDownloadCallback outerDownloadCallback) {
         //这是zip下载到的路径
-//        String path = activity.getFilesDir().getAbsolutePath()
-//                + File.separator + CommonUtils.getName(url);
         String path = activity.getFilesDir().getAbsolutePath()
-                + File.separator + "LYFPicture";
+                + File.separator + CommonUtils.getName(url);
 
 
         RxNet.download(url, path, new DownloadCallback() {
@@ -50,7 +48,22 @@ public class RxNet {
             @Override
             public void onFinish(File file, String message) {
                 LogUtil.d(message + " onFinish " + file.getAbsolutePath());
-                if (outerDownloadCallback != null) outerDownloadCallback.onSuccess();
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            AntZipUtils.uncompressFile(path, activity.getFilesDir().getAbsolutePath() + File.separator, true);
+                            LogUtil.d("解压完成");
+
+                            if (outerDownloadCallback != null) outerDownloadCallback.onSuccess();
+
+                        } catch (Exception e) {
+                            LogUtil.d("解压出现问题：" + e);
+                        }
+                    }
+                }).start();
+
 
 
             }

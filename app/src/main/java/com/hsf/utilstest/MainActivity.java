@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
         binding.btnDownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RxNet.downloadFacade("https://p9.itc.cn/images01/20230424/13241326c6f049edaf43a682cc583478.jpeg", "", "",
+                RxNet.downloadFacade("https://lottojackpotslots.s3.us-east-2.amazonaws.com/com.Lotto.Jackpot.Slots777/5.0.0/debug/subgame/loading.zip", "", "",
                         MainActivity.this, new OuterDownloadCallback() {
                             @Override
                             public void onSuccess() {

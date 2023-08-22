@@ -14,8 +14,8 @@ public class AntZipUtils {
 
     /**
      * 使用Apache的Ant解压方式
-     * @param sourceFilePath 源压缩文件的路径
-     * @param targetDirPath 解压的目标路径
+     * @param sourceFilePath 源压缩文件的路径（例，/data/user/0/com.Lotto.Jackpot.Slots777/files/loading.zip）
+     * @param targetDirPath 解压的目标路径（例，/data/user/0/com.Lotto.Jackpot.Slots777/files/）
      * @param deleteSource 解压成功后，是否删除源文件
      */
     public static void uncompressFile(String sourceFilePath, String targetDirPath, boolean deleteSource) throws Exception{
